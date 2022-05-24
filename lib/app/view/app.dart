@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:population_repository/population_repository.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/l10n/l10n.dart';
 
@@ -20,7 +22,12 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const GameView(),
+      home: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(create: (_) => const PopulationRepository()),
+        ],
+        child: const GameView(),
+      ),
     );
   }
 }
