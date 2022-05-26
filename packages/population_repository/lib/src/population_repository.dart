@@ -6,7 +6,7 @@ class PopulationRepository {
   const PopulationRepository();
 
   /// Return the percent of casualities at a given age
-  double calculateCasualities(int age) {
+  int calculateCasualities(int age) {
     return 0;
   }
 }

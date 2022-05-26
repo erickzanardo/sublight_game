@@ -20,8 +20,8 @@ void main() {
       'population gets older on YearPassed',
       build: () => GameBloc(
         state: const GameState(
-          space: 10,
-          speed: 0.1,
+          position: Offset.zero,
+          rooms: {},
           population: {
             10: 10,
             11: 10,
@@ -32,8 +32,8 @@ void main() {
       act: (bloc) => bloc.add(YearPassed()),
       expect: () => [
         const GameState(
-          space: 10,
-          speed: 0.1,
+          position: Offset.zero,
+          rooms: {},
           population: {
             11: 10,
             12: 10,
@@ -45,13 +45,12 @@ void main() {
     blocTest<GameBloc, GameState>(
       'population can suffers casualities on YearPassed',
       setUp: () {
-        when(() => populationRepository.calculateCasualities(10))
-            .thenReturn(0.2);
+        when(() => populationRepository.calculateCasualities(10)).thenReturn(2);
       },
       build: () => GameBloc(
         state: const GameState(
-          space: 10,
-          speed: 0.1,
+          position: Offset.zero,
+          rooms: {},
           population: {
             10: 10,
             11: 10,
@@ -62,8 +61,8 @@ void main() {
       act: (bloc) => bloc.add(YearPassed()),
       expect: () => [
         const GameState(
-          space: 10,
-          speed: 0.1,
+          position: Offset.zero,
+          rooms: {},
           population: {
             11: 8,
             12: 10,

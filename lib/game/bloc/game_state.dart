@@ -1,56 +1,83 @@
 part of 'game_bloc.dart';
 
-class GameState extends Equatable {
-  const GameState({
+class ShipModifier {
+  const ShipModifier({
     required this.space,
-    required this.speed,
-    required this.population,
+    required this.sblSpeed,
+    required this.impulseSpeed,
   });
 
-  const GameState.initial()
+  const ShipModifier.noEffects()
       : this(
-          space: 1000,
-          speed: 0.2,
-          population: const {
-            20: 10,
-            21: 10,
-            22: 10,
-            23: 10,
-            24: 10,
-            25: 10,
-            26: 10,
-            27: 10,
-            28: 10,
-            29: 10,
-            30: 10,
-            31: 10,
-            32: 10,
-            33: 10,
-            34: 10,
-            35: 10,
-          },
+          space: 0,
+          sblSpeed: 0,
+          impulseSpeed: 0,
         );
 
   final int space;
-  final double speed;
+  final double sblSpeed;
+  final double impulseSpeed;
+
+  ShipModifier copyWith({
+    int? space,
+    double? sblSpeed,
+    double? impulseSpeed,
+  }) {
+    return ShipModifier(
+      space: space ?? this.space,
+      sblSpeed: sblSpeed ?? this.sblSpeed,
+      impulseSpeed: impulseSpeed ?? this.impulseSpeed,
+    );
+  }
+}
+
+enum ShipModule {
+  bridge(ShipModifier.noEffects()),
+  livingQuarters(ShipModifier(space: 20, sblSpeed: 0, impulseSpeed: 0)),
+  sblDriver(ShipModifier(space: 0, sblSpeed: 0.1, impulseSpeed: 0)),
+  impulseDriver(ShipModifier(space: 0, sblSpeed: 0, impulseSpeed: 0.2));
+
+  const ShipModule(this.modifier);
+
+  final ShipModifier modifier;
+}
+
+class ShipRoom extends Equatable {
+  const ShipRoom({this.module});
+
+  final ShipModule? module;
+
+  @override
+  List<Object?> get props => [module];
+}
+
+class GameState extends Equatable {
+  const GameState({
+    required this.population,
+    required this.rooms,
+    required this.position,
+  });
+
   final Map<int, int> population;
+  final Map<Vector2, ShipRoom> rooms;
+  final Offset position;
 
   GameState copyWith({
-    int? space,
-    double? speed,
     Map<int, int>? population,
+    Map<Vector2, ShipRoom>? rooms,
+    Offset? position,
   }) {
     return GameState(
-      space: space ?? this.space,
-      speed: speed ?? this.speed,
       population: population ?? this.population,
+      rooms: rooms ?? this.rooms,
+      position: position ?? this.position,
     );
   }
 
   @override
   List<Object> get props => [
-        space,
-        speed,
         population,
+        rooms,
+        position,
       ];
 }
