@@ -4,19 +4,38 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:population_repository/population_repository.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
+import 'package:sublight_game/game/navigation/navigation.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        final populationRepository = context.read<PopulationRepository>();
-        return GameBloc(
-          populationRepository: populationRepository,
-        );
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) {
+            final populationRepository = context.read<PopulationRepository>();
+            return GameBloc(
+              populationRepository: populationRepository,
+            );
+          },
+        ),
+        BlocProvider(
+          create: (context) {
+            // TODO(erickzanardo): just mocking with some random data to test
+            return NavigationCubit(
+              const NavigationState(
+                systems: [
+                  SolarSystem(name: 'Alpha', position: Offset(1, 4)),
+                  SolarSystem(name: 'Beta', position: Offset(-2, 2)),
+                  SolarSystem(name: 'Delta', position: Offset(-2, -4)),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
       child: const GameView(),
     );
   }
@@ -37,7 +56,11 @@ class _GameViewState extends State<GameView> {
     super.initState();
 
     final gameBloc = context.read<GameBloc>();
-    gameplay = SublightGameplay(gameBloc: gameBloc);
+    final navigationCubit = context.read<NavigationCubit>();
+    gameplay = SublightGameplay(
+      gameBloc: gameBloc,
+      navigationCubit: navigationCubit,
+    );
   }
 
   @override
