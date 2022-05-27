@@ -26,7 +26,7 @@ class App extends StatelessWidget {
         providers: [
           RepositoryProvider(create: (_) => const PopulationRepository()),
         ],
-        child: const GameView(),
+        child: const GamePage(),
       ),
     );
   }
