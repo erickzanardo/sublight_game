@@ -142,7 +142,7 @@ packages:
       path: "."
       ref: HEAD
       resolved-ref: e161daf360f49423355b4822ff4342bad00c6977
-      url: "git@github.com:VeryGoodOpenSource/flame_behaviors.git"
+      url: "https://github.com/VeryGoodOpenSource/flame_behaviors"
     source: git
     version: "0.0.1-dev.1"
   flame_bloc:
