@@ -130,10 +130,28 @@ packages:
   flame:
     dependency: "direct main"
     description:
-      name: flame
+      path: "packages/flame"
+      ref: HEAD
+      resolved-ref: "53268b5f5fd81f3822bfda9721b97be4e72e48e3"
+      url: "https://github.com/flame-engine/flame"
+    source: git
+    version: "1.1.1"
+  flame_behaviors:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: e161daf360f49423355b4822ff4342bad00c6977
+      url: "git@github.com:VeryGoodOpenSource/flame_behaviors.git"
+    source: git
+    version: "0.0.1-dev.1"
+  flame_bloc:
+    dependency: "direct main"
+    description:
+      name: flame_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.4.0"
   flutter:
     dependency: "direct main"
     description: flutter
