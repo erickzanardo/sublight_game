@@ -31,6 +31,8 @@ class GamePage extends StatelessWidget {
                   SolarSystem(name: 'Beta', position: Offset(-2, 2)),
                   SolarSystem(name: 'Delta', position: Offset(-2, -4)),
                 ],
+                target: NavigationValue<Offset>(null),
+                selected: NavigationValue<SolarSystem>(null),
               ),
             );
           },

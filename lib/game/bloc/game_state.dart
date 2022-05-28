@@ -1,6 +1,6 @@
 part of 'game_bloc.dart';
 
-class ShipModifier {
+class ShipModifier extends Equatable {
   const ShipModifier({
     required this.space,
     required this.sblSpeed,
@@ -29,6 +29,9 @@ class ShipModifier {
       impulseSpeed: impulseSpeed ?? this.impulseSpeed,
     );
   }
+
+  @override
+  List<Object?> get props => [space, sblSpeed, impulseSpeed];
 }
 
 enum ShipModule {
@@ -59,12 +62,12 @@ class GameState extends Equatable {
   });
 
   final Map<int, int> population;
-  final Map<Vector2, ShipRoom> rooms;
+  final Map<Offset, ShipRoom> rooms;
   final Offset position;
 
   GameState copyWith({
     Map<int, int>? population,
-    Map<Vector2, ShipRoom>? rooms,
+    Map<Offset, ShipRoom>? rooms,
     Offset? position,
   }) {
     return GameState(

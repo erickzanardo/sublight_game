@@ -13,15 +13,38 @@ class SolarSystem extends Equatable {
   List<Object> get props => [name, position];
 }
 
+class NavigationValue<T> extends Equatable {
+  const NavigationValue(this.value);
+
+  final T? value;
+
+  @override
+  List<Object?> get props => [value];
+}
+
 class NavigationState extends Equatable {
   const NavigationState({
     required this.systems,
-    this.target,
+    required this.selected,
+    required this.target,
   });
 
   final List<SolarSystem> systems;
-  final Offset? target;
+  final NavigationValue<SolarSystem> selected;
+  final NavigationValue<Offset> target;
+
+  NavigationState copyWith({
+    List<SolarSystem>? systems,
+    NavigationValue<SolarSystem>? selected,
+    NavigationValue<Offset>? target,
+  }) {
+    return NavigationState(
+      systems: systems ?? this.systems,
+      selected: selected ?? this.selected,
+      target: target ?? this.target,
+    );
+  }
 
   @override
-  List<Object?> get props => [systems, target];
+  List<Object?> get props => [systems, selected, target];
 }
