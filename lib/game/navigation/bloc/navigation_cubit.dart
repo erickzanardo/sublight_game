@@ -24,10 +24,11 @@ class NavigationCubit extends Cubit<NavigationState> {
     );
   }
 
-  void setTarget(Offset value) {
+  void setTarget(SolarSystem value) {
     emit(
       state.copyWith(
-        target: NavigationValue<Offset>(value),
+        target: NavigationValue<SolarSystem>(value),
+        selected: const NavigationValue<SolarSystem>(null),
       ),
     );
   }
@@ -35,7 +36,7 @@ class NavigationCubit extends Cubit<NavigationState> {
   void removeTarget() {
     emit(
       state.copyWith(
-        target: const NavigationValue<Offset>(null),
+        target: const NavigationValue<SolarSystem>(null),
       ),
     );
   }

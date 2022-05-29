@@ -57,10 +57,10 @@ class SolarSystemPanel extends StatelessWidget {
         const Gap.verticalSmall(),
         ElevatedButton(
           onPressed: () {
-            context.read<NavigationCubit>().unselectSolarSystem();
+            context.read<NavigationCubit>().setTarget(system);
             Navigator.of(context).pop();
           },
-          child: const Text('Close'),
+          child: const Text('Set destination'),
         ),
         const Gap.verticalSmall(),
         ElevatedButton(

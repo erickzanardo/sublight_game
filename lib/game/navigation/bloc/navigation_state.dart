@@ -31,12 +31,12 @@ class NavigationState extends Equatable {
 
   final List<SolarSystem> systems;
   final NavigationValue<SolarSystem> selected;
-  final NavigationValue<Offset> target;
+  final NavigationValue<SolarSystem> target;
 
   NavigationState copyWith({
     List<SolarSystem>? systems,
     NavigationValue<SolarSystem>? selected,
-    NavigationValue<Offset>? target,
+    NavigationValue<SolarSystem>? target,
   }) {
     return NavigationState(
       systems: systems ?? this.systems,

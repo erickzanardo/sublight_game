@@ -10,7 +10,7 @@ void main() {
         NavigationState(
           systems: const [],
           selected: NavigationValue<SolarSystem>(null),
-          target: NavigationValue<Offset>(null),
+          target: NavigationValue<SolarSystem>(null),
         ),
         isNotNull,
       );
@@ -21,13 +21,13 @@ void main() {
         NavigationState(
           systems: const [],
           selected: NavigationValue<SolarSystem>(null),
-          target: NavigationValue<Offset>(null),
+          target: NavigationValue<SolarSystem>(null),
         ),
         equals(
           NavigationState(
             systems: const [],
             selected: NavigationValue<SolarSystem>(null),
-            target: NavigationValue<Offset>(null),
+            target: NavigationValue<SolarSystem>(null),
           ),
         ),
       );
@@ -36,14 +36,14 @@ void main() {
         NavigationState(
           systems: const [],
           selected: NavigationValue<SolarSystem>(null),
-          target: NavigationValue<Offset>(null),
+          target: NavigationValue<SolarSystem>(null),
         ),
         isNot(
           equals(
             NavigationState(
               systems: const [SolarSystem(name: 'name', position: Offset.zero)],
               selected: NavigationValue<SolarSystem>(null),
-              target: NavigationValue<Offset>(null),
+              target: NavigationValue<SolarSystem>(null),
             ),
           ),
         ),
@@ -53,7 +53,7 @@ void main() {
         NavigationState(
           systems: const [],
           selected: NavigationValue<SolarSystem>(null),
-          target: NavigationValue<Offset>(null),
+          target: NavigationValue<SolarSystem>(null),
         ),
         isNot(
           equals(
@@ -65,7 +65,7 @@ void main() {
                   position: Offset.zero,
                 ),
               ),
-              target: NavigationValue<Offset>(null),
+              target: NavigationValue<SolarSystem>(null),
             ),
           ),
         ),
@@ -75,14 +75,19 @@ void main() {
         NavigationState(
           systems: const [],
           selected: NavigationValue<SolarSystem>(null),
-          target: NavigationValue<Offset>(null),
+          target: NavigationValue<SolarSystem>(null),
         ),
         isNot(
           equals(
             NavigationState(
               systems: const [],
               selected: NavigationValue<SolarSystem>(null),
-              target: NavigationValue<Offset>(Offset.zero),
+              target: NavigationValue<SolarSystem>(
+                SolarSystem(
+                  name: 'name',
+                  position: Offset.zero,
+                ),
+              ),
             ),
           ),
         ),
