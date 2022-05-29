@@ -62,6 +62,14 @@ class SolarSystemPanel extends StatelessWidget {
           },
           child: const Text('Close'),
         ),
+        const Gap.verticalSmall(),
+        ElevatedButton(
+          onPressed: () {
+            context.read<NavigationCubit>().unselectSolarSystem();
+            Navigator.of(context).pop();
+          },
+          child: const Text('Close'),
+        ),
         const Gap.verticalMedium(),
       ],
     );
