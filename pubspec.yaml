@@ -23,6 +23,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+  modal_bottom_sheet: ^2.0.1
   population_repository:
     path: packages/population_repository
 

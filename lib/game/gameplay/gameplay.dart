@@ -17,6 +17,24 @@ class SublightGameplay extends FlameGame with PanDetector, HasTappables {
   final GameBloc gameBloc;
   final NavigationCubit navigationCubit;
 
+  List<Vector2> _cameraStack = [];
+
+  void pushCameraMovement(Vector2 position) {
+    _cameraStack = [
+      camera.position.clone(),
+      ..._cameraStack,
+    ];
+
+    camera.moveTo(position);
+  }
+
+  void popCameraMovement() {
+    if (_cameraStack.isNotEmpty) {
+      final position = _cameraStack.removeAt(0);
+      camera.moveTo(position);
+    }
+  }
+
   @override
   void onPanUpdate(DragUpdateInfo info) {
     camera.snapTo(camera.position - info.delta.game);

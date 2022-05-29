@@ -67,6 +67,11 @@ class _GameViewState extends State<GameView> {
 
   @override
   Widget build(BuildContext context) {
-    return GameWidget(game: gameplay);
+    return MultiBlocListener(
+      listeners: [
+        SolarSystemDialogListener(gameplay: gameplay),
+      ],
+      child: GameWidget(game: gameplay),
+    );
   }
 }

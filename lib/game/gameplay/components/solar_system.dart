@@ -3,7 +3,9 @@ import 'package:flame/input.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:sublight_game/game/gameplay/gameplay.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
+import 'package:sublight_game/ui/ui.dart';
 
 class _SolarSystemSelection extends RectangleComponent {
   _SolarSystemSelection()
@@ -18,7 +20,10 @@ class _SolarSystemSelection extends RectangleComponent {
 }
 
 class _SolarSystemTapBehavior extends Behavior<SolarSystemComponent>
-    with Tappable, FlameBlocReader<NavigationCubit, NavigationState> {
+    with
+        Tappable,
+        FlameBlocReader<NavigationCubit, NavigationState>,
+        HasGameRef<SublightGameplay> {
   @override
   bool containsPoint(Vector2 point) {
     return parent.containsPoint(point);
@@ -46,6 +51,7 @@ class _SolarSystemTapBehavior extends Behavior<SolarSystemComponent>
         onNewState: (state) {
           if (state.selected.value == parent.system) {
             parent.add(_SolarSystemSelection());
+            gameRef.overlayPanelFocus(parent);
           } else {
             parent.firstChild<_SolarSystemSelection>()?.removeFromParent();
           }
