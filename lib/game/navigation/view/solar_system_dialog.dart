@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
 import 'package:sublight_game/ui/ui.dart';
@@ -16,11 +17,15 @@ class SolarSystemDialogListener
           listener: (context, state) {
             if (state.selected.value != null) {
               final navigationCubit = context.read<NavigationCubit>();
+              final gameBloc = context.read<GameBloc>();
               showOverlayPanel<void>(
                 context: context,
                 builder: (context) {
-                  return BlocProvider.value(
-                    value: navigationCubit,
+                  return MultiBlocProvider(
+                    providers: [
+                      BlocProvider.value(value: navigationCubit),
+                      BlocProvider.value(value: gameBloc),
+                    ],
                     child: SolarSystemPanel(system: state.selected.value!),
                   );
                 },
@@ -42,6 +47,7 @@ class SolarSystemPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isShipMoving = context.watch<GameBloc>().state.moving;
     return Column(
       children: [
         Expanded(
@@ -55,14 +61,16 @@ class SolarSystemPanel extends StatelessWidget {
           ),
         ),
         const Gap.verticalSmall(),
-        ElevatedButton(
-          onPressed: () {
-            context.read<NavigationCubit>().setTarget(system);
-            Navigator.of(context).pop();
-          },
-          child: const Text('Set destination'),
-        ),
-        const Gap.verticalSmall(),
+        if (!isShipMoving) ...[
+          ElevatedButton(
+            onPressed: () {
+              context.read<NavigationCubit>().setTarget(system);
+              Navigator.of(context).pop();
+            },
+            child: const Text('Set destination'),
+          ),
+          const Gap.verticalSmall(),
+        ],
         ElevatedButton(
           onPressed: () {
             context.read<NavigationCubit>().unselectSolarSystem();

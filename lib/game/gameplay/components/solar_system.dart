@@ -107,6 +107,7 @@ class SolarSystemComponent extends Entity {
       : super(
           anchor: Anchor.center,
           size: Vector2.all(30),
+          priority: 1,
           children: [
             CircleComponent(
               paint: Paint()..color = Colors.yellow,

@@ -18,6 +18,14 @@ class ShipModifier extends Equatable {
   final double sblSpeed;
   final double impulseSpeed;
 
+  ShipModifier operator +(ShipModifier other) {
+    return copyWith(
+      space: space + other.space,
+      sblSpeed: sblSpeed + other.sblSpeed,
+      impulseSpeed: impulseSpeed + other.impulseSpeed,
+    );
+  }
+
   ShipModifier copyWith({
     int? space,
     double? sblSpeed,
@@ -59,21 +67,37 @@ class GameState extends Equatable {
     required this.population,
     required this.rooms,
     required this.position,
+    required this.moving,
   });
 
   final Map<int, int> population;
   final Map<Offset, ShipRoom> rooms;
   final Offset position;
+  final bool moving;
+
+  ShipModifier get modifier {
+    return rooms.values.fold(
+      const ShipModifier.noEffects(),
+      (previousValue, element) {
+        final otherModifier =
+            element.module?.modifier ?? const ShipModifier.noEffects();
+
+        return previousValue + otherModifier;
+      },
+    );
+  }
 
   GameState copyWith({
     Map<int, int>? population,
     Map<Offset, ShipRoom>? rooms,
     Offset? position,
+    bool? moving,
   }) {
     return GameState(
       population: population ?? this.population,
       rooms: rooms ?? this.rooms,
       position: position ?? this.position,
+      moving: moving ?? this.moving,
     );
   }
 
@@ -82,5 +106,6 @@ class GameState extends Equatable {
         population,
         rooms,
         position,
+        moving,
       ];
 }

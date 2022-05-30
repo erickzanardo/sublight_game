@@ -12,11 +12,14 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       population: {},
       rooms: {},
       position: Offset.zero,
+      moving: false,
     ),
     PopulationRepository populationRepository = const PopulationRepository(),
   })  : _populationRepository = populationRepository,
         super(state) {
     on<YearPassed>(_onYearPassed);
+    on<DriveEngaged>(_onDriveEngaged);
+    on<DriveDisengaged>(_onDriveDisengaged);
   }
 
   final PopulationRepository _populationRepository;
@@ -36,5 +39,24 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     }
 
     emit(state.copyWith(population: updatedPopulation));
+  }
+
+  void _onDriveEngaged(
+    DriveEngaged event,
+    Emitter<GameState> emit,
+  ) {
+    emit(state.copyWith(moving: true));
+  }
+
+  void _onDriveDisengaged(
+    DriveDisengaged event,
+    Emitter<GameState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        moving: false,
+        position: event.position,
+      ),
+    );
   }
 }

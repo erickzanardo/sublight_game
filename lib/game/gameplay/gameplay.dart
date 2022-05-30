@@ -12,6 +12,7 @@ class SublightGameplay extends FlameGame with PanDetector, HasTappables {
     required this.navigationCubit,
   });
 
+  static const engageOverlay = 'ENGAGE';
   static const lightYearsRatio = 40.0;
 
   final GameBloc gameBloc;
@@ -64,6 +65,24 @@ class SublightGameplay extends FlameGame with PanDetector, HasTappables {
               position: system.position.toVector2() * lightYearsRatio,
             );
           }),
+          FlameBlocListener<NavigationCubit, NavigationState>(
+            listenWhen: (previous, current) =>
+                previous.target.value != current.target.value,
+            onNewState: (state) {
+              if (state.target.value != null) {
+                overlays.add(engageOverlay);
+              }
+            },
+          ),
+          FlameBlocListener<GameBloc, GameState>(
+            listenWhen: (previous, current) =>
+                previous.moving != current.moving,
+            onNewState: (state) {
+              if (state.moving) {
+                overlays.remove(engageOverlay);
+              }
+            },
+          ),
         ],
       ),
     );

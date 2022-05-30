@@ -18,6 +18,17 @@ class GamePage extends StatelessWidget {
             final populationRepository = context.read<PopulationRepository>();
             return GameBloc(
               populationRepository: populationRepository,
+              state: GameState(
+                position: Offset.zero,
+                population: const {},
+                moving: false,
+                rooms: {
+                  Offset.zero: const ShipRoom(module: ShipModule.bridge),
+                  const Offset(0, 1): const ShipRoom(
+                    module: ShipModule.sblDriver,
+                  ),
+                },
+              ),
             );
           },
         ),
@@ -71,7 +82,23 @@ class _GameViewState extends State<GameView> {
       listeners: [
         SolarSystemDialogListener(gameplay: gameplay),
       ],
-      child: GameWidget(game: gameplay),
+      child: GameWidget<SublightGameplay>(
+        game: gameplay,
+        overlayBuilderMap: {
+          SublightGameplay.engageOverlay: (context, game) {
+            return Positioned(
+              top: 16,
+              right: 16,
+              child: ElevatedButton(
+                child: const Text('Engage'),
+                onPressed: () {
+                  game.gameBloc.add(DriveEngaged());
+                },
+              ),
+            );
+          },
+        },
+      ),
     );
   }
 }
