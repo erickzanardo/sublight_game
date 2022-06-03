@@ -5,6 +5,7 @@ import 'package:population_repository/population_repository.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
+import 'package:sublight_game/game/timeflow/timeflow.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({super.key});
@@ -48,6 +49,7 @@ class GamePage extends StatelessWidget {
             );
           },
         ),
+        BlocProvider(create: (_) => TimeflowCubit()),
       ],
       child: const GameView(),
     );
@@ -70,9 +72,11 @@ class _GameViewState extends State<GameView> {
 
     final gameBloc = context.read<GameBloc>();
     final navigationCubit = context.read<NavigationCubit>();
+    final timeflowCubit = context.read<TimeflowCubit>();
     gameplay = SublightGameplay(
       gameBloc: gameBloc,
       navigationCubit: navigationCubit,
+      timeflowCubit: timeflowCubit,
     );
   }
 
@@ -84,6 +88,7 @@ class _GameViewState extends State<GameView> {
       ],
       child: GameWidget<SublightGameplay>(
         game: gameplay,
+        initialActiveOverlays: const [SublightGameplay.timeflowPanel],
         overlayBuilderMap: {
           SublightGameplay.engageOverlay: (context, game) {
             return Positioned(
@@ -95,6 +100,13 @@ class _GameViewState extends State<GameView> {
                   game.gameBloc.add(DriveEngaged());
                 },
               ),
+            );
+          },
+          SublightGameplay.timeflowPanel: (context, game) {
+            return const Positioned(
+              bottom: 16,
+              left: 16,
+              child: TimeControlePanel(),
             );
           },
         },

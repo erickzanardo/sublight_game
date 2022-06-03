@@ -22,6 +22,7 @@ void main() {
         state: const GameState(
           position: Offset.zero,
           rooms: {},
+          moving: false,
           population: {
             10: 10,
             11: 10,
@@ -34,6 +35,7 @@ void main() {
         const GameState(
           position: Offset.zero,
           rooms: {},
+          moving: false,
           population: {
             11: 10,
             12: 10,
@@ -51,6 +53,7 @@ void main() {
         state: const GameState(
           position: Offset.zero,
           rooms: {},
+          moving: false,
           population: {
             10: 10,
             11: 10,
@@ -63,6 +66,7 @@ void main() {
         const GameState(
           position: Offset.zero,
           rooms: {},
+          moving: false,
           population: {
             11: 8,
             12: 10,

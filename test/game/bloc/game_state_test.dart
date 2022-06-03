@@ -11,6 +11,7 @@ void main() {
           population: const {},
           rooms: const {},
           position: Offset.zero,
+          moving: false,
         ),
         isNotNull,
       );
@@ -22,12 +23,14 @@ void main() {
           population: const {},
           rooms: const {},
           position: Offset.zero,
+          moving: false,
         ),
         equals(
           GameState(
             population: const {},
             rooms: const {},
             position: Offset.zero,
+            moving: false,
           ),
         ),
       );
@@ -37,6 +40,7 @@ void main() {
           population: const {},
           rooms: const {},
           position: Offset.zero,
+          moving: false,
         ),
         isNot(
           equals(
@@ -44,6 +48,7 @@ void main() {
               population: const {},
               rooms: const {},
               position: Offset(1, 0),
+              moving: false,
             ),
           ),
         ),
@@ -54,6 +59,7 @@ void main() {
           population: const {},
           rooms: const {},
           position: Offset.zero,
+          moving: false,
         ),
         isNot(
           equals(
@@ -61,6 +67,7 @@ void main() {
               population: const {},
               rooms: {Offset.zero: ShipRoom()},
               position: Offset.zero,
+              moving: false,
             ),
           ),
         ),
@@ -71,6 +78,7 @@ void main() {
           population: const {},
           rooms: const {},
           position: Offset.zero,
+          moving: false,
         ),
         isNot(
           equals(
@@ -78,6 +86,7 @@ void main() {
               population: const {},
               rooms: {Offset.zero: ShipRoom(module: ShipModule.bridge)},
               position: Offset.zero,
+              moving: false,
             ),
           ),
         ),
@@ -88,6 +97,7 @@ void main() {
           population: const {},
           rooms: const {},
           position: Offset.zero,
+          moving: false,
         ),
         isNot(
           equals(
@@ -95,6 +105,26 @@ void main() {
               population: const {1: 10},
               rooms: const {},
               position: Offset.zero,
+              moving: false,
+            ),
+          ),
+        ),
+      );
+
+      expect(
+        GameState(
+          population: const {},
+          rooms: const {},
+          position: Offset.zero,
+          moving: true,
+        ),
+        isNot(
+          equals(
+            GameState(
+              population: const {},
+              rooms: const {},
+              position: Offset.zero,
+              moving: false,
             ),
           ),
         ),
@@ -108,12 +138,14 @@ void main() {
             population: const {},
             rooms: const {},
             position: Offset.zero,
+            moving: false,
           ).copyWith(population: {1: 10}),
           equals(
             GameState(
               population: const {1: 10},
               rooms: const {},
               position: Offset.zero,
+              moving: false,
             ),
           ),
         );
@@ -125,11 +157,13 @@ void main() {
             population: const {},
             rooms: const {},
             position: Offset.zero,
+            moving: false,
           ).copyWith(rooms: {Offset(2, 2): ShipRoom()}),
           equals(
             GameState(
               population: const {},
               rooms: {Offset(2, 2): ShipRoom()},
+              moving: false,
               position: Offset.zero,
             ),
           ),
@@ -142,11 +176,13 @@ void main() {
             population: const {},
             rooms: const {},
             position: Offset.zero,
+            moving: false,
           ).copyWith(position: Offset(1, 2)),
           equals(
             GameState(
               population: const {},
               rooms: const {},
+              moving: false,
               position: Offset(1, 2),
             ),
           ),

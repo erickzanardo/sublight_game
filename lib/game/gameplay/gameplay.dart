@@ -5,18 +5,23 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/components/components.dart';
 import 'package:sublight_game/game/navigation/bloc/navigation_cubit.dart';
+import 'package:sublight_game/game/timeflow/cubit/timeflow_cubit.dart';
 
 class SublightGameplay extends FlameGame with PanDetector, HasTappables {
   SublightGameplay({
     required this.gameBloc,
     required this.navigationCubit,
+    required this.timeflowCubit,
   });
 
   static const engageOverlay = 'ENGAGE';
+  static const timeflowPanel = 'TIME_PANEL';
   static const lightYearsRatio = 40.0;
 
   final GameBloc gameBloc;
   final NavigationCubit navigationCubit;
+  final TimeflowCubit timeflowCubit;
+  late final Timebar _timeBar;
 
   List<Vector2> _cameraStack = [];
 
@@ -47,44 +52,51 @@ class SublightGameplay extends FlameGame with PanDetector, HasTappables {
       position: gameBloc.state.position.toVector2(),
     );
 
-    await add(
-      FlameMultiBlocProvider(
-        providers: [
-          FlameBlocProvider<GameBloc, GameState>.value(
-            value: gameBloc,
-          ),
-          FlameBlocProvider<NavigationCubit, NavigationState>.value(
-            value: navigationCubit,
-          ),
-        ],
-        children: [
-          spaceship,
-          ...navigationCubit.state.systems.map((system) {
-            return SolarSystemComponent(
-              system: system,
-              position: system.position.toVector2() * lightYearsRatio,
-            );
-          }),
-          FlameBlocListener<NavigationCubit, NavigationState>(
-            listenWhen: (previous, current) =>
-                previous.target.value != current.target.value,
-            onNewState: (state) {
-              if (state.target.value != null) {
-                overlays.add(engageOverlay);
-              }
-            },
-          ),
-          FlameBlocListener<GameBloc, GameState>(
-            listenWhen: (previous, current) =>
-                previous.moving != current.moving,
-            onNewState: (state) {
-              if (state.moving) {
-                overlays.remove(engageOverlay);
-              }
-            },
-          ),
-        ],
-      ),
+    await addAll(
+      [
+        _timeBar = Timebar(),
+        FlameMultiBlocProvider(
+          providers: [
+            FlameBlocProvider<GameBloc, GameState>.value(
+              value: gameBloc,
+            ),
+            FlameBlocProvider<NavigationCubit, NavigationState>.value(
+              value: navigationCubit,
+            ),
+            FlameBlocProvider<TimeflowCubit, TimeflowState>.value(
+              value: timeflowCubit,
+            ),
+          ],
+          children: [
+            Timeflow(timeBar: _timeBar),
+            spaceship,
+            ...navigationCubit.state.systems.map((system) {
+              return SolarSystemComponent(
+                system: system,
+                position: system.position.toVector2() * lightYearsRatio,
+              );
+            }),
+            FlameBlocListener<NavigationCubit, NavigationState>(
+              listenWhen: (previous, current) =>
+                  previous.target.value != current.target.value,
+              onNewState: (state) {
+                if (state.target.value != null) {
+                  overlays.add(engageOverlay);
+                }
+              },
+            ),
+            FlameBlocListener<GameBloc, GameState>(
+              listenWhen: (previous, current) =>
+                  previous.moving != current.moving,
+              onNewState: (state) {
+                if (state.moving) {
+                  overlays.remove(engageOverlay);
+                }
+              },
+            ),
+          ],
+        ),
+      ],
     );
 
     camera.snapTo(-size / 2);
