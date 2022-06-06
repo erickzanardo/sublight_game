@@ -87,8 +87,7 @@ class _SolarSystemTargetBehavior extends Behavior<SolarSystemComponent>
     await add(
       FlameBlocListener<NavigationCubit, NavigationState>(
         listenWhen: (previous, newState) {
-          return previous.target.value == parent.system ||
-              newState.target.value == parent.system;
+          return previous.target.value != newState.target.value;
         },
         onNewState: (state) {
           if (state.target.value == parent.system) {
