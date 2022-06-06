@@ -22,3 +22,12 @@ class DriveDisengaged extends GameEvent {
   @override
   List<Object> get props => [position];
 }
+
+class PositionReported extends GameEvent {
+  const PositionReported(this.position);
+
+  final Offset position;
+
+  @override
+  List<Object> get props => [position];
+}

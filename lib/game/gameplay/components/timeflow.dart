@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
 
 class Timeflow extends Component with HasGameRef<SublightGameplay> {
@@ -11,13 +12,12 @@ class Timeflow extends Component with HasGameRef<SublightGameplay> {
 
   @override
   void update(double dt) {
-    // TODO(erickzanardo): time speed
     value += dt * gameRef.timeflowCubit.state.speed.value;
     if (value >= 365) {
       value -= 365;
-      // TODO(erickzanardo): trigger year passed
+      gameRef.gameBloc.add(YearPassed());
     }
-    timeBar.size = Vector2(value / 365 * gameRef.size.x, 16);
+    timeBar.size.x = value / 365 * gameRef.size.x;
   }
 }
 

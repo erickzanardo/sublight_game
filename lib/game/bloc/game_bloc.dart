@@ -13,6 +13,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       rooms: {},
       position: Offset.zero,
       moving: false,
+      year: 1,
     ),
     PopulationRepository populationRepository = const PopulationRepository(),
   })  : _populationRepository = populationRepository,
@@ -20,6 +21,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<YearPassed>(_onYearPassed);
     on<DriveEngaged>(_onDriveEngaged);
     on<DriveDisengaged>(_onDriveDisengaged);
+    on<PositionReported>(_onPositionReported);
   }
 
   final PopulationRepository _populationRepository;
@@ -38,7 +40,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       updatedPopulation[entry.key + 1] = entry.value - casualities;
     }
 
-    emit(state.copyWith(population: updatedPopulation));
+    emit(
+      state.copyWith(
+        population: updatedPopulation,
+        year: state.year + 1,
+      ),
+    );
   }
 
   void _onDriveEngaged(
@@ -55,6 +62,17 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     emit(
       state.copyWith(
         moving: false,
+        position: event.position,
+      ),
+    );
+  }
+
+  void _onPositionReported(
+    PositionReported event,
+    Emitter<GameState> emit,
+  ) {
+    emit(
+      state.copyWith(
         position: event.position,
       ),
     );

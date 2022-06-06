@@ -27,6 +27,7 @@ void main() {
             10: 10,
             11: 10,
           },
+          year: 1,
         ),
         populationRepository: populationRepository,
       ),
@@ -40,6 +41,7 @@ void main() {
             11: 10,
             12: 10,
           },
+          year: 2,
         ),
       ],
     );
@@ -58,6 +60,7 @@ void main() {
             10: 10,
             11: 10,
           },
+          year: 1,
         ),
         populationRepository: populationRepository,
       ),
@@ -71,6 +74,7 @@ void main() {
             11: 8,
             12: 10,
           },
+          year: 2,
         ),
       ],
     );

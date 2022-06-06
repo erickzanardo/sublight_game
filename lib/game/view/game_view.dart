@@ -29,6 +29,7 @@ class GamePage extends StatelessWidget {
                     module: ShipModule.sblDriver,
                   ),
                 },
+                year: 1,
               ),
             );
           },
@@ -90,16 +91,11 @@ class _GameViewState extends State<GameView> {
         game: gameplay,
         initialActiveOverlays: const [SublightGameplay.timeflowPanel],
         overlayBuilderMap: {
-          SublightGameplay.engageOverlay: (context, game) {
-            return Positioned(
-              top: 16,
-              right: 16,
-              child: ElevatedButton(
-                child: const Text('Engage'),
-                onPressed: () {
-                  game.gameBloc.add(DriveEngaged());
-                },
-              ),
+          SublightGameplay.navigationPanel: (context, game) {
+            return const Positioned(
+              bottom: 100,
+              left: 16,
+              child: NavigationPanel(),
             );
           },
           SublightGameplay.timeflowPanel: (context, game) {
