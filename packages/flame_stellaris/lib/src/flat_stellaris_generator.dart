@@ -3,7 +3,6 @@ import 'package:flame_stellaris/flame_stellaris.dart';
 import 'package:flame_stellaris/src/effects.dart';
 import 'package:flutter/material.dart';
 
-
 /// {@template flat_stellaris_generator}
 /// Generates stellar body in a flat style.
 /// {@endtemplate}

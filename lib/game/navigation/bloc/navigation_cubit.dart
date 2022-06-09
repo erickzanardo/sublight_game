@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:solar_system_repository/solar_system_repository.dart';
 
 part 'navigation_state.dart';
 

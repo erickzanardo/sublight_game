@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:population_repository/population_repository.dart';
+import 'package:solar_system_repository/solar_system_repository.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
@@ -37,15 +38,28 @@ class GamePage extends StatelessWidget {
         BlocProvider(
           create: (context) {
             // TODO(erickzanardo): just mocking with some random data to test
+            final solarSystemRepository = context.read<SolarSystemRepository>();
             return NavigationCubit(
-              const NavigationState(
+              NavigationState(
                 systems: [
-                  SolarSystem(name: 'Alpha', position: Offset(1, 4)),
-                  SolarSystem(name: 'Beta', position: Offset(-2, 2)),
-                  SolarSystem(name: 'Delta', position: Offset(-2, -4)),
+                  SolarSystem(
+                    name: 'Alpha',
+                    position: const Offset(1, 4),
+                    type: solarSystemRepository.getRandomStarType(),
+                  ),
+                  SolarSystem(
+                    name: 'Beta',
+                    position: const Offset(-2, 2),
+                    type: solarSystemRepository.getRandomStarType(),
+                  ),
+                  SolarSystem(
+                    name: 'Delta',
+                    position: const Offset(-2, -4),
+                    type: solarSystemRepository.getRandomStarType(),
+                  ),
                 ],
-                target: NavigationValue<SolarSystem>(null),
-                selected: NavigationValue<SolarSystem>(null),
+                target: const NavigationValue<SolarSystem>(null),
+                selected: const NavigationValue<SolarSystem>(null),
               ),
             );
           },

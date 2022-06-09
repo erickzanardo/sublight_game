@@ -368,6 +368,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  solar_system_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/solar_system_repository"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   source_map_stack_trace:
     dependency: transitive
     description:

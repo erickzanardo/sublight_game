@@ -26,6 +26,8 @@ dependencies:
   modal_bottom_sheet: ^2.0.1
   population_repository:
     path: packages/population_repository
+  solar_system_repository:
+    path: packages/solar_system_repository
 
 dev_dependencies:
   bloc_test: ^9.0.3

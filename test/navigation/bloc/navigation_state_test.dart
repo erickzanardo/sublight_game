@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:solar_system_repository/solar_system_repository.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
 
 void main() {
@@ -41,7 +42,13 @@ void main() {
         isNot(
           equals(
             NavigationState(
-              systems: const [SolarSystem(name: 'name', position: Offset.zero)],
+              systems: const [
+                SolarSystem(
+                  name: 'name',
+                  position: Offset.zero,
+                  type: StarType.o,
+                ),
+              ],
               selected: NavigationValue<SolarSystem>(null),
               target: NavigationValue<SolarSystem>(null),
             ),
@@ -63,6 +70,7 @@ void main() {
                 SolarSystem(
                   name: 'name',
                   position: Offset.zero,
+                  type: StarType.o,
                 ),
               ),
               target: NavigationValue<SolarSystem>(null),
@@ -86,6 +94,7 @@ void main() {
                 SolarSystem(
                   name: 'name',
                   position: Offset.zero,
+                  type: StarType.o,
                 ),
               ),
             ),
