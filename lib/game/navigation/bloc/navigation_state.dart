@@ -4,15 +4,15 @@ class SolarSystem extends Equatable {
   const SolarSystem({
     required this.name,
     required this.position,
-    required this.type,
+    required this.star,
   });
 
   final String name;
   final Offset position;
-  final StarType type;
+  final Star star;
 
   @override
-  List<Object> get props => [name, position, type];
+  List<Object> get props => [name, position, star];
 }
 
 class NavigationValue<T> extends Equatable {

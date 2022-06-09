@@ -29,6 +29,18 @@ class GamePage extends StatelessWidget {
                   const Offset(0, 1): const ShipRoom(
                     module: ShipModule.sblDriver,
                   ),
+                  const Offset(1, 1): const ShipRoom(
+                    module: ShipModule.sblDriver,
+                  ),
+                  const Offset(-1, 1): const ShipRoom(
+                    module: ShipModule.sblDriver,
+                  ),
+                  const Offset(-2, 1): const ShipRoom(
+                    module: ShipModule.sblDriver,
+                  ),
+                  const Offset(2, 1): const ShipRoom(
+                    module: ShipModule.sblDriver,
+                  ),
                 },
                 year: 1,
               ),
@@ -45,17 +57,17 @@ class GamePage extends StatelessWidget {
                   SolarSystem(
                     name: 'Alpha',
                     position: const Offset(1, 4),
-                    type: solarSystemRepository.getRandomStarType(),
+                    star: solarSystemRepository.getRandomStar(),
                   ),
                   SolarSystem(
                     name: 'Beta',
                     position: const Offset(-2, 2),
-                    type: solarSystemRepository.getRandomStarType(),
+                    star: solarSystemRepository.getRandomStar(),
                   ),
                   SolarSystem(
                     name: 'Delta',
                     position: const Offset(-2, -4),
-                    type: solarSystemRepository.getRandomStarType(),
+                    star: solarSystemRepository.getRandomStar(),
                   ),
                 ],
                 target: const NavigationValue<SolarSystem>(null),

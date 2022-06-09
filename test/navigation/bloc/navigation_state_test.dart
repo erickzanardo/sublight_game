@@ -46,7 +46,7 @@ void main() {
                 SolarSystem(
                   name: 'name',
                   position: Offset.zero,
-                  type: StarType.o,
+                  star: Star(type: StarType.o, scale: 1),
                 ),
               ],
               selected: NavigationValue<SolarSystem>(null),
@@ -70,7 +70,7 @@ void main() {
                 SolarSystem(
                   name: 'name',
                   position: Offset.zero,
-                  type: StarType.o,
+                  star: Star(type: StarType.o, scale: 1),
                 ),
               ),
               target: NavigationValue<SolarSystem>(null),
@@ -94,7 +94,7 @@ void main() {
                 SolarSystem(
                   name: 'name',
                   position: Offset.zero,
-                  type: StarType.o,
+                  star: Star(type: StarType.o, scale: 1),
                 ),
               ),
             ),

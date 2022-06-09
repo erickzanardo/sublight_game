@@ -13,7 +13,7 @@ void main() {
       expect(SolarSystemRepository(), isNotNull);
     });
 
-    group('getRandomStarType', () {
+    group('getRandomStar', () {
       for (final type in StarType.values) {
         test(
           'return ${type.name} when random returns '
@@ -21,9 +21,17 @@ void main() {
           () {
             final rng = MockRandom();
             when(rng.nextDouble).thenReturn(type.definition.probability);
-            final result = SolarSystemRepository(rng: rng).getRandomStarType();
+            final result = SolarSystemRepository(rng: rng).getRandomStar();
 
-            expect(result, equals(type));
+            expect(result.type, equals(type));
+            expect(
+              result.scale,
+              greaterThanOrEqualTo(type.definition.scaleMin),
+            );
+            expect(
+              result.scale,
+              lessThanOrEqualTo(type.definition.scaleMax),
+            );
           },
         );
       }

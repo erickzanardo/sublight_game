@@ -4,35 +4,54 @@ import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_bloc/flame_bloc.dart';
+import 'package:flame_stellaris/flame_stellaris.dart';
 import 'package:flutter/material.dart';
+import 'package:solar_system_repository/solar_system_repository.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
 import 'package:sublight_game/ui/ui.dart';
 
-class _SolarSystemSelection extends RectangleComponent {
-  _SolarSystemSelection()
-      : super.square(
-          size: 40,
-          position: Vector2(-5, -5),
-          paint: Paint()
-            ..color = Colors.green
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 2,
-        );
+class _SolarSystemSelection extends PositionComponent
+    with ParentIsA<PositionComponent> {
+  _SolarSystemSelection() : super(anchor: Anchor.center);
+
+  @override
+  Future<void> onLoad() async {
+    await add(
+      RectangleComponent.square(
+        size: parent.size.x + 10,
+        position: Vector2.all(-5),
+        paint: Paint()
+          ..color = Colors.green
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
+      ),
+    );
+  }
 }
 
-class _SolarSystemTarget extends RectangleComponent {
+class _SolarSystemTarget extends PositionComponent
+    with ParentIsA<PositionComponent> {
   _SolarSystemTarget()
-      : super.square(
-          size: 40,
-          angle: pi / 4,
+      : super(
           anchor: Anchor.center,
-          position: Vector2(15, 15),
-          paint: Paint()
-            ..color = Colors.orange
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 2,
+          angle: pi / 4,
         );
+
+  @override
+  Future<void> onLoad() async {
+    position = parent.size / 2;
+    await add(
+      RectangleComponent.square(
+        size: parent.size.x + 10,
+        anchor: Anchor.center,
+        paint: Paint()
+          ..color = Colors.orange
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
+      ),
+    );
+  }
 }
 
 class _SolarSystemSelectionBehavior extends Behavior<SolarSystemComponent>
@@ -101,17 +120,58 @@ class _SolarSystemTargetBehavior extends Behavior<SolarSystemComponent>
   }
 }
 
+extension StarX on Star {
+  double get size => 30 * scale;
+
+  List<Color> get palette {
+    switch (type) {
+      case StarType.m:
+        return [Colors.orangeAccent, Colors.red];
+      case StarType.k:
+        return [Colors.orange, Colors.yellowAccent];
+      case StarType.g:
+      case StarType.f:
+        return [Colors.yellow, Colors.white];
+      case StarType.a:
+        return [Colors.lightBlueAccent, Colors.white];
+      case StarType.b:
+        return [Colors.blueGrey, Colors.white];
+      case StarType.o:
+        return [Colors.blueAccent, Colors.white];
+    }
+  }
+}
+
+class _SolarSystemStar extends PositionComponent
+    with ParentIsA<PositionComponent> {
+  _SolarSystemStar(this.star);
+
+  final Star star;
+
+  @override
+  Future<void> onLoad() async {
+    size = parent.size;
+    const flameStellaris = FlatStellarisGenerator();
+    await add(
+      flameStellaris.generateStar(
+        StarData(
+          position: size / 2,
+          size: star.size,
+          color: star.palette,
+        ),
+      ),
+    );
+  }
+}
+
 class SolarSystemComponent extends Entity {
   SolarSystemComponent({required this.system, super.position})
       : super(
           anchor: Anchor.center,
-          size: Vector2.all(30),
+          size: Vector2.all(system.star.size),
           priority: 1,
           children: [
-            CircleComponent(
-              paint: Paint()..color = Colors.yellow,
-              radius: 15,
-            ),
+            _SolarSystemStar(system.star),
           ],
           behaviors: [
             _SolarSystemSelectionBehavior(),

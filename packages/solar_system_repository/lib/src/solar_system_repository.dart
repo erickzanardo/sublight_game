@@ -14,7 +14,7 @@ class SolarSystemRepository {
   late final Random _rng;
 
   /// Returns a random [StarType] based on its probability.
-  StarType getRandomStarType() {
+  Star getRandomStar() {
     final value = _rng.nextDouble();
     final values = [...StarType.values]..sort((a, b) {
         if (a.definition.probability > b.definition.probability) return 1;
@@ -22,12 +22,19 @@ class SolarSystemRepository {
         return 0;
       });
 
+    var currentType = StarType.m;
     for (final type in values) {
       if (value <= type.definition.probability) {
-        return type;
+        currentType = type;
+        break;
       }
     }
 
-    return StarType.m;
+    final interval =
+        currentType.definition.scaleMax - currentType.definition.scaleMin;
+    final scale =
+        currentType.definition.scaleMin + _rng.nextDouble() * interval;
+
+    return Star(type: currentType, scale: scale);
   }
 }
