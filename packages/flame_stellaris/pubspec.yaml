@@ -1,0 +1,18 @@
+name: flame_stellaris
+description: Flame package used to create components that represents stars and stellar bodies
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  fast_noise: ^1.0.1
+  flame: ^1.1.1
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^3.0.0
