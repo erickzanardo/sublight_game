@@ -63,7 +63,7 @@ abstract class StellarisGenerator {
       anchor: anchor,
       children: [
         for (int x = 0; x < arr2d.length; x++)
-          for (int y = 0; y < arr2d[y].length; y++)
+          for (int y = 0; y < arr2d[x].length; y++)
             if (arr2d[x][y].abs() > 0.3)
               CircleComponent(
                 anchor: Anchor.center,

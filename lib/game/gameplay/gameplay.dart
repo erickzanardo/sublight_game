@@ -54,6 +54,7 @@ class SublightGameplay extends FlameGame with PanDetector, HasTappables {
 
     await addAll(
       [
+        StellarisBackground(),
         _timeBar = Timebar(),
         FlameMultiBlocProvider(
           providers: [
