@@ -108,9 +108,15 @@ class SpaceshipComponent extends Entity {
           size: Vector2.all(10),
           priority: 2,
           children: [
-            CircleComponent(
-              paint: Paint()..color = Colors.blue,
-              radius: 5,
+            PolygonComponent(
+              [
+                Vector2(0, 20),
+                Vector2(15, 0),
+                Vector2(-15, 0),
+                Vector2(0, 20),
+              ],
+              paint: Paint()..color = Colors.greenAccent,
+              size: Vector2(25, 25),
             ),
           ],
           behaviors: [

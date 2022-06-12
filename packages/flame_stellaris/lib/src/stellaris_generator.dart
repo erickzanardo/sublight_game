@@ -56,7 +56,7 @@ abstract class StellarisGenerator {
       frequency: 0.8,
     );
 
-    final paint = Paint()..color = Colors.white;
+    final paint = Paint()..color = Colors.blueGrey;
 
     return PositionComponent(
       position: position,
