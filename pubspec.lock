@@ -144,12 +144,10 @@ packages:
   flame:
     dependency: "direct main"
     description:
-      path: "packages/flame"
-      ref: HEAD
-      resolved-ref: "53268b5f5fd81f3822bfda9721b97be4e72e48e3"
-      url: "https://github.com/flame-engine/flame"
-    source: git
-    version: "1.1.1"
+      name: flame
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   flame_behaviors:
     dependency: "direct main"
     description:
@@ -524,4 +522,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.17.0 <3.0.0"
-  flutter: ">=2.5.0"
+  flutter: ">=2.10.0"
