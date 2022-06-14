@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sublight_game/game/extensions/extensions.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
+import 'package:sublight_game/game/navigation/view/solar_system_dialog/solar_system_icon.dart';
 import 'package:sublight_game/ui/ui.dart';
 
 class SolarSystemDialogListener
@@ -51,13 +53,25 @@ class SolarSystemPanel extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Column(
-            children: [
-              Text(
-                system.name,
-                style: Theme.of(context).textTheme.headline3,
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Text(
+                  system.name,
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                const Gap.verticalBig(),
+                SolarSystemIcon(star: system.star),
+                const Gap.verticalBig(),
+                Text(
+                  '${system.star.starClass} star class system',
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+                const Gap.verticalSmall(),
+                Text(system.star.description),
+              ],
+            ),
           ),
         ),
         const Gap.verticalSmall(),

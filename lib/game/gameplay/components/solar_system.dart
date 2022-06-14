@@ -7,6 +7,7 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flame_stellaris/flame_stellaris.dart';
 import 'package:flutter/material.dart';
 import 'package:solar_system_repository/solar_system_repository.dart';
+import 'package:sublight_game/game/extensions/extensions.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
 import 'package:sublight_game/ui/ui.dart';
@@ -117,28 +118,6 @@ class _SolarSystemTargetBehavior extends Behavior<SolarSystemComponent>
         },
       ),
     );
-  }
-}
-
-extension StarX on Star {
-  double get size => 30 * scale;
-
-  List<Color> get palette {
-    switch (type) {
-      case StarType.m:
-        return [Colors.orangeAccent, Colors.red];
-      case StarType.k:
-        return [Colors.orange, Colors.yellowAccent];
-      case StarType.g:
-      case StarType.f:
-        return [Colors.yellow, Colors.white];
-      case StarType.a:
-        return [Colors.lightBlueAccent, Colors.white];
-      case StarType.b:
-        return [Colors.blueGrey, Colors.white];
-      case StarType.o:
-        return [Colors.blueAccent, Colors.white];
-    }
   }
 }
 

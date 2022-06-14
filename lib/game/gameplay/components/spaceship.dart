@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_bloc/flame_bloc.dart';
@@ -117,6 +118,27 @@ class SpaceshipComponent extends Entity {
               ],
               paint: Paint()..color = Colors.greenAccent,
               size: Vector2(25, 25),
+              anchor: Anchor.center,
+              //position: Vector2.all(-12),
+              children: [
+                SequenceEffect(
+                  [
+                    ScaleEffect.to(
+                      Vector2(-1, 1),
+                      EffectController(
+                        duration: 4,
+                      ),
+                    ),
+                    ScaleEffect.to(
+                      Vector2(1, 1),
+                      EffectController(
+                        duration: 4,
+                      ),
+                    ),
+                  ],
+                  infinite: true,
+                ),
+              ],
             ),
           ],
           behaviors: [
