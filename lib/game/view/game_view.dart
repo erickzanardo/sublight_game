@@ -94,16 +94,17 @@ class _GameViewState extends State<GameView> {
   late final SublightGameplay gameplay;
 
   @override
-  void initState() {
-    super.initState();
-
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     final gameBloc = context.read<GameBloc>();
     final navigationCubit = context.read<NavigationCubit>();
     final timeflowCubit = context.read<TimeflowCubit>();
+
     gameplay = SublightGameplay(
       gameBloc: gameBloc,
       navigationCubit: navigationCubit,
       timeflowCubit: timeflowCubit,
+      theme: Theme.of(context),
     );
   }
 
@@ -119,7 +120,7 @@ class _GameViewState extends State<GameView> {
         overlayBuilderMap: {
           SublightGameplay.navigationPanel: (context, game) {
             return const Positioned(
-              bottom: 100,
+              bottom: 120,
               left: 16,
               child: NavigationPanel(),
             );

@@ -14,6 +14,7 @@ dependencies:
   flame_bloc: ^1.5.0
   flame_stellaris:
     path: packages/flame_stellaris
+  flex_color_scheme: ^5.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
@@ -36,3 +37,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  fonts:
+  - family: Firealistic
+    fonts:
+      - asset: assets/fonts/firealistic-regular.otf

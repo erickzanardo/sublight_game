@@ -21,8 +21,8 @@ class NavigationPanel extends StatelessWidget {
 
     return Card(
       child: SizedBox(
-        width: 150,
-        height: 120,
+        width: 170,
+        height: 150,
         child: Column(
           children: [
             const Gap.verticalSmall(),

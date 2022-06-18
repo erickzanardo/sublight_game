@@ -21,11 +21,13 @@ class Timeflow extends Component with HasGameRef<SublightGameplay> {
   }
 }
 
-class Timebar extends PositionComponent with HasPaint {
-  Timebar() {
+class Timebar extends PositionComponent
+    with HasPaint, HasGameRef<SublightGameplay> {
+  @override
+  Future<void> onLoad() async {
     positionType = PositionType.widget;
     height = 16;
-    paint = Paint()..color = Colors.blue;
+    paint = Paint()..color = gameRef.theme.primaryColorDark;
   }
 
   @override

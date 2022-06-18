@@ -13,7 +13,7 @@ Future<T?> showOverlayPanel<T>({
       enableDrag: false,
       builder: (context) => SizedBox(
         height: context.bottomSheetHeight(),
-        child: builder(context),
+        child: Material(child: builder(context)),
       ),
     );
   } else {

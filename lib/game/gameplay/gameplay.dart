@@ -2,6 +2,7 @@ import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_bloc/flame_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/components/components.dart';
 import 'package:sublight_game/game/navigation/bloc/navigation_cubit.dart';
@@ -12,12 +13,14 @@ class SublightGameplay extends FlameGame with PanDetector, HasTappables {
     required this.gameBloc,
     required this.navigationCubit,
     required this.timeflowCubit,
+    required this.theme,
   });
 
   static const navigationPanel = 'NAVIGATION_PANEL';
   static const timeflowPanel = 'TIME_PANEL';
   static const lightYearsRatio = 40.0;
 
+  final ThemeData theme;
   final GameBloc gameBloc;
   final NavigationCubit navigationCubit;
   final TimeflowCubit timeflowCubit;

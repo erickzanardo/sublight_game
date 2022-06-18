@@ -5,6 +5,7 @@ import 'package:population_repository/population_repository.dart';
 import 'package:solar_system_repository/solar_system_repository.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/l10n/l10n.dart';
+import 'package:sublight_game/theme/theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,12 +13,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
-      ),
+      themeMode: ThemeMode.dark,
+      theme: sublightTheme,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
