@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flame/extensions.dart';
 import 'package:population_repository/population_repository.dart';
+import 'package:sublight_game/game/models/models.dart';
 
 part 'game_event.dart';
 part 'game_state.dart';
@@ -9,8 +10,8 @@ part 'game_state.dart';
 class GameBloc extends Bloc<GameEvent, GameState> {
   GameBloc({
     GameState state = const GameState(
-      population: {},
-      rooms: {},
+      population: <int, int>{},
+      rooms: <Offset, ShipRoom>{},
       position: Offset.zero,
       moving: false,
       year: 1,

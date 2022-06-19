@@ -2,6 +2,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sublight_game/game/game.dart';
+import 'package:sublight_game/game/models/models.dart';
 
 void main() {
   group('GameState', () {
@@ -9,7 +10,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: false,
           year: 1,
@@ -22,7 +23,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: false,
           year: 1,
@@ -30,7 +31,7 @@ void main() {
         equals(
           GameState(
             population: const {},
-            rooms: const {},
+            rooms: const <Offset, ShipRoom>{},
             position: Offset.zero,
             moving: false,
             year: 1,
@@ -41,7 +42,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: false,
           year: 1,
@@ -50,7 +51,7 @@ void main() {
           equals(
             GameState(
               population: const {},
-              rooms: const {},
+              rooms: const <Offset, ShipRoom>{},
               position: Offset(1, 0),
               moving: false,
               year: 1,
@@ -62,7 +63,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: false,
           year: 1,
@@ -71,7 +72,7 @@ void main() {
           equals(
             GameState(
               population: const {},
-              rooms: {Offset.zero: ShipRoom()},
+              rooms: <Offset, ShipRoom>{Offset.zero: ShipRoom()},
               position: Offset.zero,
               moving: false,
               year: 1,
@@ -83,7 +84,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: false,
           year: 1,
@@ -92,7 +93,11 @@ void main() {
           equals(
             GameState(
               population: const {},
-              rooms: {Offset.zero: ShipRoom(module: ShipModule.bridge)},
+              rooms: <Offset, ShipRoom>{
+                Offset.zero: ShipRoom(
+                  module: ShipModule.bridge,
+                ),
+              },
               position: Offset.zero,
               moving: false,
               year: 1,
@@ -104,7 +109,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: false,
           year: 1,
@@ -113,7 +118,7 @@ void main() {
           equals(
             GameState(
               population: const {},
-              rooms: const {},
+              rooms: const <Offset, ShipRoom>{},
               position: Offset.zero,
               moving: false,
               year: 2,
@@ -125,7 +130,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: false,
           year: 1,
@@ -134,7 +139,7 @@ void main() {
           equals(
             GameState(
               population: const {1: 10},
-              rooms: const {},
+              rooms: const <Offset, ShipRoom>{},
               position: Offset.zero,
               moving: false,
               year: 1,
@@ -146,7 +151,7 @@ void main() {
       expect(
         GameState(
           population: const {},
-          rooms: const {},
+          rooms: const <Offset, ShipRoom>{},
           position: Offset.zero,
           moving: true,
           year: 1,
@@ -155,7 +160,7 @@ void main() {
           equals(
             GameState(
               population: const {},
-              rooms: const {},
+              rooms: const <Offset, ShipRoom>{},
               position: Offset.zero,
               moving: false,
               year: 1,
@@ -170,7 +175,7 @@ void main() {
         expect(
           GameState(
             population: const {},
-            rooms: const {},
+            rooms: const <Offset, ShipRoom>{},
             position: Offset.zero,
             moving: false,
             year: 1,
@@ -178,7 +183,7 @@ void main() {
           equals(
             GameState(
               population: const {1: 10},
-              rooms: const {},
+              rooms: const <Offset, ShipRoom>{},
               position: Offset.zero,
               moving: false,
               year: 1,
@@ -191,15 +196,15 @@ void main() {
         expect(
           GameState(
             population: const {},
-            rooms: const {},
+            rooms: const <Offset, ShipRoom>{},
             position: Offset.zero,
             moving: false,
             year: 1,
-          ).copyWith(rooms: {Offset(2, 2): ShipRoom()}),
+          ).copyWith(rooms: <Offset, ShipRoom>{Offset(2, 2): ShipRoom()}),
           equals(
             GameState(
               population: const {},
-              rooms: {Offset(2, 2): ShipRoom()},
+              rooms: <Offset, ShipRoom>{Offset(2, 2): ShipRoom()},
               moving: false,
               position: Offset.zero,
               year: 1,
@@ -212,7 +217,7 @@ void main() {
         expect(
           GameState(
             population: const {},
-            rooms: const {},
+            rooms: const <Offset, ShipRoom>{},
             position: Offset.zero,
             moving: false,
             year: 1,
@@ -220,7 +225,7 @@ void main() {
           equals(
             GameState(
               population: const {},
-              rooms: const {},
+              rooms: const <Offset, ShipRoom>{},
               moving: false,
               position: Offset(1, 2),
               year: 1,

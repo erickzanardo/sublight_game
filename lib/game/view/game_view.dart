@@ -5,6 +5,7 @@ import 'package:population_repository/population_repository.dart';
 import 'package:solar_system_repository/solar_system_repository.dart';
 import 'package:sublight_game/game/game.dart';
 import 'package:sublight_game/game/gameplay/gameplay.dart';
+import 'package:sublight_game/game/models/models.dart';
 import 'package:sublight_game/game/navigation/navigation.dart';
 import 'package:sublight_game/game/timeflow/timeflow.dart';
 
