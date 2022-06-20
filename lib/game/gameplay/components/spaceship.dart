@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/extensions.dart';
@@ -32,18 +34,54 @@ class _SpaceshipMoviment extends Behavior<SpaceshipComponent>
 
     _direction = (target - gameState.position).toVector2().normalized();
 
+    parent.angle = atan2(_direction.y, _direction.x);
+
     _speed = gameState.modifier.sblSpeed;
 
-    await add(
-      TimerComponent(
-        period: 2,
-        repeat: true,
-        onTick: () {
-          if (_lastMapOffset != null) {
-            onPositionUpdated(_lastMapOffset!);
-          }
-        },
-      ),
+    ScaleEffect getEngineEffect() {
+      return ScaleEffect.to(
+        Vector2.all(0.8),
+        InfiniteEffectController(
+          SequenceEffectController(
+            [
+              CurvedEffectController(4, Curves.easeInOut),
+              ReverseCurvedEffectController(4, Curves.easeInOut),
+            ],
+          ),
+        ),
+      );
+    }
+
+    await addAll(
+      [
+        TimerComponent(
+          period: 2,
+          repeat: true,
+          onTick: () {
+            if (_lastMapOffset != null) {
+              onPositionUpdated(_lastMapOffset!);
+            }
+          },
+        ),
+        CircleComponent(
+          anchor: Anchor.center,
+          radius: 6,
+          position: Vector2(0, 5),
+          paint: Paint()..color = Colors.yellow,
+          children: [
+            getEngineEffect(),
+          ],
+        ),
+        CircleComponent(
+          anchor: Anchor.center,
+          radius: 4,
+          position: Vector2(0, 5),
+          paint: Paint()..color = Colors.orange,
+          children: [
+            getEngineEffect(),
+          ],
+        ),
+      ],
     );
   }
 
@@ -106,39 +144,21 @@ class SpaceshipComponent extends Entity {
   SpaceshipComponent({super.position})
       : super(
           anchor: Anchor.center,
-          size: Vector2.all(10),
+          size: Vector2(25, 20),
           priority: 2,
           children: [
             PolygonComponent(
               [
-                Vector2(0, 20),
                 Vector2(15, 0),
-                Vector2(-15, 0),
-                Vector2(0, 20),
+                Vector2(-15, 10),
+                Vector2(-15, -10),
+                Vector2(15, 0),
               ],
-              paint: Paint()..color = Colors.greenAccent,
-              size: Vector2(25, 25),
+              position: Vector2(12.5, 5),
               anchor: Anchor.center,
-              //position: Vector2.all(-12),
-              children: [
-                SequenceEffect(
-                  [
-                    ScaleEffect.to(
-                      Vector2(-1, 1),
-                      EffectController(
-                        duration: 4,
-                      ),
-                    ),
-                    ScaleEffect.to(
-                      Vector2(1, 1),
-                      EffectController(
-                        duration: 4,
-                      ),
-                    ),
-                  ],
-                  infinite: true,
-                ),
-              ],
+              paint: Paint()..color = Colors.greenAccent,
+              size: Vector2(25, 20),
+              priority: 2,
             ),
           ],
           behaviors: [

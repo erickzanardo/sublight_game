@@ -32,6 +32,8 @@ class NavigationPanel extends StatelessWidget {
             const Gap.verticalSmall(),
             Text('Distance: ${distance.toStringAsFixed(2)}'),
             const Gap.verticalSmall(),
+            if (gameBloc.state.moving)
+              Text('Speed: ${gameBloc.state.modifier.sblSpeed}C'),
             if (!gameBloc.state.moving)
               ElevatedButton(
                 child: const Text('Engage'),
