@@ -17,7 +17,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       year: 1,
     ),
     PopulationRepository? populationRepository,
-  })  : super(state) {
+  }) : super(state) {
     on<YearPassed>(_onYearPassed);
     on<DriveEngaged>(_onDriveEngaged);
     on<DriveDisengaged>(_onDriveDisengaged);
