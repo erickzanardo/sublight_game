@@ -20,13 +20,10 @@ class AgeRangeRiskMapping {
 }
 
 const _naturalDeathRisk = [
-  AgeRangeRiskMapping(from: 0, to: 30, percent: 0),
-  AgeRangeRiskMapping(from: 31, to: 40, percent: 0.01),
-  AgeRangeRiskMapping(from: 41, to: 50, percent: 0.04),
-  AgeRangeRiskMapping(from: 51, to: 60, percent: 0.1),
-  AgeRangeRiskMapping(from: 61, to: 70, percent: 0.2),
-  AgeRangeRiskMapping(from: 71, to: 80, percent: 0.4),
-  AgeRangeRiskMapping(from: 81, to: 90, percent: 0.8),
+  AgeRangeRiskMapping(from: 0, to: 40, percent: 0),
+  AgeRangeRiskMapping(from: 41, to: 60, percent: 0.01),
+  AgeRangeRiskMapping(from: 61, to: 80, percent: 0.1),
+  AgeRangeRiskMapping(from: 81, to: 90, percent: 0.2),
 ];
 
 AgeRangeRiskMapping Function(int) _riskMapping(

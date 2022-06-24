@@ -40,7 +40,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         entry.value,
       );
 
-      updatedPopulation[entry.key + 1] = entry.value - casualities;
+      final value = entry.value - casualities;
+      if (value == 0) {
+        updatedPopulation.remove(entry.key);
+      } else {
+        updatedPopulation[entry.key + 1] = value;
+      }
     }
 
     emit(

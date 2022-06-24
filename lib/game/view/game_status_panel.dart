@@ -17,14 +17,19 @@ class GameStatusPanel extends StatelessWidget {
           child: Row(
             children: [
               const Gap.horizontalMedium(),
-              Row(
-                children: [
-                  const Icon(Icons.people),
-                  const Gap.horizontalSmall(),
-                  Text(
-                    '${gameState.totalPopulation}/${gameState.modifier.peopleCapacity}',
-                  ),
-                ],
+              InkWell(
+                onTap: () {
+                  PopulationInfoPanel.show(context);
+                },
+                child: Row(
+                  children: [
+                    const Icon(Icons.people),
+                    const Gap.horizontalSmall(),
+                    Text(
+                      '${gameState.totalPopulation}/${gameState.modifier.peopleCapacity}',
+                    ),
+                  ],
+                ),
               ),
               const Gap.horizontalMedium(),
             ],
