@@ -16,16 +16,16 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       moving: false,
       year: 1,
     ),
-    PopulationRepository populationRepository = const PopulationRepository(),
-  })  : _populationRepository = populationRepository,
-        super(state) {
+    PopulationRepository? populationRepository,
+  })  : super(state) {
     on<YearPassed>(_onYearPassed);
     on<DriveEngaged>(_onDriveEngaged);
     on<DriveDisengaged>(_onDriveDisengaged);
     on<PositionReported>(_onPositionReported);
+    _populationRepository = populationRepository ?? PopulationRepository();
   }
 
-  final PopulationRepository _populationRepository;
+  late final PopulationRepository _populationRepository;
 
   void _onYearPassed(
     YearPassed event,
@@ -34,8 +34,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     final updatedPopulation = <int, int>{};
 
     for (final entry in state.population.entries) {
-      final casualities = _populationRepository.calculateCasualities(
+      final casualities =
+          _populationRepository.calculateNaturalCausesCasualities(
         entry.key,
+        entry.value,
       );
 
       updatedPopulation[entry.key + 1] = entry.value - casualities;

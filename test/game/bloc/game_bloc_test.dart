@@ -12,7 +12,7 @@ void main() {
 
     setUp(() {
       populationRepository = _MockPopulationRepository();
-      when(() => populationRepository.calculateCasualities(any()))
+      when(() => populationRepository.calculateNaturalCausesCasualities(any()))
           .thenReturn(0);
     });
 
@@ -49,7 +49,9 @@ void main() {
     blocTest<GameBloc, GameState>(
       'population can suffers casualities on YearPassed',
       setUp: () {
-        when(() => populationRepository.calculateCasualities(10)).thenReturn(2);
+        when(
+          () => populationRepository.calculateNaturalCausesCasualities(10, 10),
+        ).thenReturn(2);
       },
       build: () => GameBloc(
         state: const GameState(

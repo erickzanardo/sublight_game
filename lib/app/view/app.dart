@@ -22,7 +22,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       home: MultiRepositoryProvider(
         providers: [
-          RepositoryProvider(create: (_) => const PopulationRepository()),
+          RepositoryProvider(create: (_) => PopulationRepository()),
           RepositoryProvider(create: (_) => SolarSystemRepository()),
         ],
         child: const GamePage(),
