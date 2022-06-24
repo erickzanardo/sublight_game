@@ -25,38 +25,45 @@ class PopulationInfoPanel extends StatelessWidget {
       ..sort((a, b) => a.key.compareTo(b.key));
 
     return SublightPadding.horizontalMedium(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              'Population Information',
-              style: Theme.of(context).textTheme.headline4,
-              textAlign: TextAlign.center,
-            ),
-            const Gap.verticalMedium(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Age'),
-                Text('Count'),
-              ],
-            ),
-            const Divider(),
-            for (var entry in populationEntries)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        children: [
+          Text(
+            'Population Information',
+            style: Theme.of(context).textTheme.headline4,
+            textAlign: TextAlign.center,
+          ),
+          const Gap.verticalMedium(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Age'),
+              Text('Count'),
+            ],
+          ),
+          const Divider(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Text(entry.key.toString()),
-                  Text(entry.value.toString()),
+                  for (var entry in populationEntries)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(entry.key.toString()),
+                        Text(entry.value.toString()),
+                      ],
+                    ),
                 ],
               ),
-            const Divider(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text('Total ${state.totalPopulation}'),
             ),
-          ],
-        ),
+          ),
+          const Divider(),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text('Total ${state.totalPopulation}'),
+          ),
+          const Gap.verticalMedium(),
+        ],
       ),
     );
   }
