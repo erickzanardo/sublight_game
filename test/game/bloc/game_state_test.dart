@@ -239,7 +239,7 @@ void main() {
   group('ShipModifier', () {
     test('can be instantiated', () {
       expect(
-        ShipModifier(space: 0, sblSpeed: 0, impulseSpeed: 0),
+        ShipModifier(space: 0, sblSpeed: 0, impulseSpeed: 0, peopleCapacity: 0),
         isNotNull,
       );
     });
@@ -248,7 +248,12 @@ void main() {
       expect(
         ShipModifier.noEffects(),
         equals(
-          ShipModifier(space: 0, sblSpeed: 0, impulseSpeed: 0),
+          ShipModifier(
+            space: 0,
+            sblSpeed: 0,
+            impulseSpeed: 0,
+            peopleCapacity: 0,
+          ),
         ),
       );
     });
@@ -266,6 +271,7 @@ void main() {
               space: 1,
               sblSpeed: 0.2,
               impulseSpeed: 0.2,
+              peopleCapacity: 0,
             ),
           ),
         );

@@ -27,6 +27,13 @@ class GameState extends Equatable {
     );
   }
 
+  int get totalPopulation {
+    return population.values.fold(
+      0,
+      (previousValue, element) => previousValue + element,
+    );
+  }
+
   GameState copyWith({
     Map<int, int>? population,
     Map<Offset, ShipRoom>? rooms,

@@ -23,10 +23,20 @@ class GamePage extends StatelessWidget {
               populationRepository: populationRepository,
               state: GameState(
                 position: Offset.zero,
-                population: const {},
+                population: const {
+                  20: 10,
+                  21: 6,
+                  22: 7,
+                  30: 10,
+                },
                 moving: false,
                 rooms: {
-                  Offset.zero: const ShipRoom(module: ShipModule.bridge),
+                  const Offset(0, -1): const ShipRoom(
+                    module: ShipModule.bridge,
+                  ),
+                  Offset.zero: const ShipRoom(
+                    module: ShipModule.livingQuarters,
+                  ),
                   const Offset(0, 1): const ShipRoom(
                     module: ShipModule.sblDriver,
                   ),
@@ -117,7 +127,10 @@ class _GameViewState extends State<GameView> {
       ],
       child: GameWidget<SublightGameplay>(
         game: gameplay,
-        initialActiveOverlays: const [SublightGameplay.timeflowPanel],
+        initialActiveOverlays: const [
+          SublightGameplay.timeflowPanel,
+          SublightGameplay.gameStatusPanel,
+        ],
         overlayBuilderMap: {
           SublightGameplay.navigationPanel: (context, game) {
             return const Positioned(
@@ -131,6 +144,13 @@ class _GameViewState extends State<GameView> {
               bottom: 16,
               left: 16,
               child: TimeControlePanel(),
+            );
+          },
+          SublightGameplay.gameStatusPanel: (context, game) {
+            return const Positioned(
+              bottom: 16,
+              left: 216,
+              child: GameStatusPanel(),
             );
           },
         },

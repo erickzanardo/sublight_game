@@ -18,6 +18,7 @@ class SublightGameplay extends FlameGame with PanDetector, HasTappables {
 
   static const navigationPanel = 'NAVIGATION_PANEL';
   static const timeflowPanel = 'TIME_PANEL';
+  static const gameStatusPanel = 'GAME_STATUS_PANEL';
   static const lightYearsRatio = 40.0;
 
   final ThemeData theme;
