@@ -48,6 +48,13 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       }
     }
 
+    final totalBirths = _populationRepository.calculateBirths(
+      updatedPopulation,
+    );
+    if (totalBirths > 0) {
+      updatedPopulation[0] = totalBirths;
+    }
+
     emit(
       state.copyWith(
         population: updatedPopulation,

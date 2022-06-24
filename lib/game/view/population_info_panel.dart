@@ -20,37 +20,43 @@ class PopulationInfoPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<GameBloc>().state;
+
+    final populationEntries = state.population.entries.toList()
+      ..sort((a, b) => a.key.compareTo(b.key));
+
     return SublightPadding.horizontalMedium(
-      child: Column(
-        children: [
-          Text(
-            'Population Information',
-            style: Theme.of(context).textTheme.headline4,
-            textAlign: TextAlign.center,
-          ),
-          const Gap.verticalMedium(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Age'),
-              Text('Count'),
-            ],
-          ),
-          const Divider(),
-          for (var entry in state.population.entries)
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              'Population Information',
+              style: Theme.of(context).textTheme.headline4,
+              textAlign: TextAlign.center,
+            ),
+            const Gap.verticalMedium(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(entry.key.toString()),
-                Text(entry.value.toString()),
+              children: const [
+                Text('Age'),
+                Text('Count'),
               ],
             ),
-          const Divider(),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text('Total ${state.totalPopulation}'),
-          ),
-        ],
+            const Divider(),
+            for (var entry in populationEntries)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(entry.key.toString()),
+                  Text(entry.value.toString()),
+                ],
+              ),
+            const Divider(),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text('Total ${state.totalPopulation}'),
+            ),
+          ],
+        ),
       ),
     );
   }
