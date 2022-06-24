@@ -27,8 +27,9 @@ const _naturalDeathRisk = [
 ];
 
 AgeRangeRiskMapping Function(int) _riskMapping(
-    List<AgeRangeRiskMapping> mappings) {
-  // TODO cache the value for performance.
+  List<AgeRangeRiskMapping> mappings,
+) {
+  // TODO(erickzanardo): cache the value for performance.
   return (age) => mappings.firstWhere(
         (mapping) => mapping.from <= age && age <= mapping.to,
         orElse: () => mappings.last,

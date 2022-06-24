@@ -12,8 +12,12 @@ void main() {
 
     setUp(() {
       populationRepository = _MockPopulationRepository();
-      when(() => populationRepository.calculateNaturalCausesCasualities(any()))
-          .thenReturn(0);
+      when(
+        () => populationRepository.calculateNaturalCausesCasualities(
+          any(),
+          any(),
+        ),
+      ).thenReturn(0);
     });
 
     blocTest<GameBloc, GameState>(
